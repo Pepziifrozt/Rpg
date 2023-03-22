@@ -10,6 +10,11 @@ public class Movements : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     private Vector2 _movement = new Vector2();
 
+    public Vector3 CurrentMove()
+    {
+        return _movement * _moveSpeed;
+    }
+
     private void Start()
     {
         _animator = GetComponent<Animator>();
