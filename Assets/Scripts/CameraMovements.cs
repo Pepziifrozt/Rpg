@@ -8,6 +8,7 @@ public class CameraMovements : MonoBehaviour
     public float cameraSpeed = 5.0f;
     private Camera _cam;
     private Transform _playerTransform;
+    //private Vector3 movementVector = new Vector3();
     private float _velMultX = 1.0f;
     private float _velMultY = 0.5f;
     [SerializeField] private float _yVal = 0.5f;
@@ -53,16 +54,23 @@ public class CameraMovements : MonoBehaviour
     private void FollowPlayer()
     {
         Vector3 targetPosition = (_playerTransform.position + new Vector3(0.0f, _yVal, 0.0f));
-        
+
+        /*if(_playerTransform.GetComponent<Rigidbody2D>()!= null)
+        { 
+            targetPosition.x += _playerTransform.GetComponent<Rigidbody2D>().velocity.x * _velMultX;  // = does not mean equal
+            targetPosition.y += _playerTransform.GetComponent<Rigidbody2D>().velocity.y * _velMultY;  // var += 5 -> var = var + 5;
+        }*/
         targetPosition.x = Mathf.Clamp(targetPosition.x, _leftRightBounds.x, _leftRightBounds.y);
         targetPosition.y = Mathf.Clamp(targetPosition.y, _downUpBounds.x, _downUpBounds.y);
 
         targetPosition.z = transform.position.z;
 
+        //movementVector = Vector3.ClampMagnitude(movementVector, cameraSpeed);
 
         xMovement = Mathf.Clamp((targetPosition.x - transform.position.x), -cameraSpeed, cameraSpeed);
 
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, cameraSpeed * Time.deltaTime);
+        //transform.Translate(movementVector * Time.deltaTime);
     }
     public void SetUpCamera(float zDistance, float cameraSize, float velocityMultX, float velocityMultY)
     {
