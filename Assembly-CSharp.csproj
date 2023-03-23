@@ -60,6 +60,7 @@
     <Compile Include="Assets\GraphicLayers.cs" />
     <Compile Include="Assets\Scripts\Movements.cs" />
     <Compile Include="Assets\Scripts\CameraMovements.cs" />
+    <Compile Include="Assets\SnailMove.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
