@@ -24,4 +24,13 @@ public class ItemManager : MonoBehaviour
             collectableItemsDict.Add(item.type, item); 
         }
     }
+
+    public Collectable GetItemByType(CollectableType type)
+    {
+        if (collectableItemsDict.ContainsKey(type))
+        {
+            return collectableItemsDict[type];
+        }
+        return null;
+    }
 }
