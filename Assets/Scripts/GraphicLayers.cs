@@ -9,6 +9,11 @@ public class GraphicLayers : MonoBehaviour
     private SpriteRenderer _sr;
     public Transform groundPoint;
 
+    public Transform handObject;
+    public bool isBehind = false;
+
+    private int _layerNumber;
+
     void Start()
     {
         if(GetComponent<SpriteRenderer>() != null)
@@ -26,10 +31,29 @@ public class GraphicLayers : MonoBehaviour
     private void Update()
     {
         PlaceInLayers();
+        if(handObject != null )
+        {
+            HandObjectHandler();
+        }
     }
 
     private void PlaceInLayers()
     {
-        _sr.sortingOrder = -Mathf.FloorToInt(groundPoint.position.y * 100.0f);
+        _layerNumber = -Mathf.FloorToInt(groundPoint.position.y * 100.0f);
+        _sr.sortingOrder = _layerNumber;
+    }
+    private void HandObjectHandler()
+    {
+        if(handObject.childCount > 0)
+        {
+            if(isBehind)
+            {
+                handObject.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = _layerNumber - 1;
+            }
+            else
+            {
+                handObject.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = _layerNumber + 1;
+            }
+        }
     }
 }
